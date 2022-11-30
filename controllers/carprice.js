@@ -35,12 +35,12 @@ exports.getall_carprice = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "some error" });
+        .send({ success: false, message: "invalid " });
     }
   } catch (err) {
     res
       .status(400)
-      .send({ success: false, message: "some thing went wrong" });
+      .send({ success: false, message: err });
   }
 };
 

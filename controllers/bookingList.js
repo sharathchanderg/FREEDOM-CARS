@@ -35,8 +35,8 @@ exports.new_booking = async (req, res) => {
         res.status(400).json({ success: false, message: err });
       } else {
         res
-          .status(201)
-          .json({ success: true, message: "data inserted successfully" });
+          .status(200)
+          .json({ success: true, message: "data inserted successfully",response:data });
       }
     });
   } catch (err) {
@@ -65,7 +65,7 @@ exports.edit_booking = async (req, res) => {
     if (data) {
       res.status(200).send({ success: true, updated: data });
     } else {
-      res.status(404).send("some thing went wrong to update profile");
+      res.status(404).send({success:false, message:"Invalid booking"});
     }
   } catch (error) {
     res.status(400).send({ success: false, message: error });
@@ -79,11 +79,11 @@ exports.delete_booking = async (req, res) => {
       res.status(200).send({ success: true, message: "successfully deleted" });
     } else {
       res
-        .status(404)
-        .send({ success: false, message: "something went wrong" });
+        .status(400)
+        .send({ success: false, message: "invalid booking" });
     }
   } catch (err) {
-    res.status(404).send({ success: false, message: err });
+    res.status(400).send({ success: false, message: err });
   }
 };
 
@@ -95,7 +95,7 @@ exports.getAllBookings = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "not found due to some error" });
+        .send({ success: false, message: "invalid booking" });
     }
   } catch (err) {
     res

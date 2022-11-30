@@ -37,7 +37,7 @@ exports.addCarmodel = function (req, res) {
     });
     carmodel.save(function (err, data) {
       if (data) {
-        res.status(201).send({ success: true, message: data });
+        res.status(200).send({ success: true, message: data });
       } else {
         res.status(400).send({ success: false, message: err });
       }
@@ -58,12 +58,12 @@ exports.getallCarModels = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "error" });
+        .send({ success: false, message: "invalid model" });
     }
   } catch (err) {
     res
       .status(400)
-      .send({ success: false, message: "some thing went wrong" });
+      .send({ success: false, message: err });
   }
 };
 
@@ -88,12 +88,12 @@ exports.updateCarModel = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "not updated due to some error" });
+        .send({ success: false, message: "invalid model" });
     }
   } catch (err) {
     res
       .status(400)
-      .send({ success: false, message: "not updated some thing went wrong" });
+      .send({ success: false, message: err});
   }
 };
 
@@ -106,12 +106,12 @@ exports.deleteCarModel = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "not deleted due to some error" });
+        .send({ success: false, message: "invalid model" });
     }
   } catch (err) {
     res
       .status(400)
-      .send({ success: false, message: "not deleted some thing went wrong" });
+      .send({ success: false, message: err });
   }
 };
 
