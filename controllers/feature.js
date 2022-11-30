@@ -64,7 +64,7 @@ exports.getallCarfeatures = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "error" });
+        .send({ success: false, message: "not found", response:[]});
     }
   } catch (err) {
     res
