@@ -1,12 +1,13 @@
 const Feature = require("../models/feature");
 
-exports.new_feature = async function(req, res){
+
+exports.new_feature = async function (req, res) {
   try {
-    let logdate = new Date().toISOString() 
-    const features =  new Feature({
-        feature_name: req.body.feature_name,
-        date: logdate,
-        status: req.body.status
+    let logdate = new Date().toISOString();
+    const features = new Feature({
+      feature_name: req.body.feature_name,
+      date: logdate,
+      status: req.body.status,
     }).save((err, data) => {
       if (err) {
         res.status(400).json({ success: false, message: err });
@@ -21,14 +22,14 @@ exports.new_feature = async function(req, res){
   }
 };
 
-exports.edit_feature = async function(req, res){
+//update feature
+exports.edit_feature = async function (req, res) {
   try {
-    
     const data = await Feature.findOneAndUpdate(
       { _id: req.params.id },
       {
         feature_name: req.body.feature_name,
-        status: req.body.status
+        status: req.body.status,
       }
     );
     if (data) {
@@ -41,7 +42,8 @@ exports.edit_feature = async function(req, res){
   }
 };
 
-exports.delete_feature = async function(req, res) {
+//delete feature
+exports.delete_feature = async function (req, res) {
   try {
     const data = await Feature.findOneAndDelete({ _id: req.params.id });
     if (data) {
@@ -60,15 +62,17 @@ exports.getallCarfeatures = async function (req, res) {
     if (featureFound) {
       res
         .status(200)
-        .send({ success: true, message: "successfull", response: featureFound });
+        .send({
+          success: true,
+          message: "successfull",
+          response: featureFound,
+        });
     } else {
       res
         .status(400)
-        .send({ success: false, message: "not found", response:[]});
+        .send({ success: false, message: "not found", response: [] });
     }
   } catch (err) {
-    res
-      .status(400)
-      .send({ success: false, message: "some thing went wrong" });
+    res.status(400).send({ success: false, message: "some thing went wrong" });
   }
 };

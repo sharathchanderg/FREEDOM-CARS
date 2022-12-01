@@ -60,6 +60,7 @@ app.get("/get", (req, res) => {
   res.status(200).send("Hello I am from SERVER");
 });
 
+//swagger checking API
 /**
  * @swagger
  * /get:
@@ -71,25 +72,10 @@ app.get("/get", (req, res) => {
  *
  */
 
-//get booking details
-const booking = require("./models/bookingList");
-
-app.get("/all", async (req, res) => {
-  await booking
-    .find({})
-    .then((response) => {
-      res.status(200).json({ response });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "employee not with this id try another" + error,
-      });
-    });
-});
-
+//get all the data of schema by swagger
 /**
  * @swagger
- * /all:
+ * /freedom-cars-carprice/all:
  *  get:
  *      summary: To get the booking details from the list
  *      description: This API works on booking details fetchig
@@ -98,24 +84,10 @@ app.get("/all", async (req, res) => {
  *              description: Success
  */
 
-app.get("/api/:id", async (req, res) => {
-  let id = req.params.id;
-  booking
-    .findOne({ _id: id })
-    .then((response) => {
-      res.status(200).json({ data: response });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "employee not with this id try another" + error,
-      });
-    });
-});
-
-//get by id
+//get the data by the data of schema by swagger
 /**
  * @swagger
- * /api/{id}:
+ * /freedom-cars-carprice/get/{id}:
  *    get:
  *     summary: Fetch the individual objects.
  *     description: Get all Employee by id.
@@ -142,6 +114,40 @@ app.get("/api/:id", async (req, res) => {
  *                     customer_name:
  *                       type: string
  */
+
+
+//post the data by swagger
+/**
+ * @swagger
+ * /freedom-cars-carprice/new:
+ *    post:
+ *     summary: to send the individual data.
+ *     description: send the data.
+ *     requestBody: 
+ *         required: true
+ *         content:
+ *              application/json:
+ *                 schema:
+ *                    carprices:
+ *                             type: object
+ *                             properties:
+ *                                drive_period:
+ *                                     type: integer
+ *                                car_model_name:
+ *                                      type: string 
+ *     responses:
+ *       200:
+ *         description: added successfully.
+ *         
+ */
+
+
+app.listen(port, () => {
+  console.log(`http://127.0.0.1:${port}`);
+});
+
+
+
 //  /upload:
 //  post:
 //    summary: Uploads a file.
@@ -152,42 +158,3 @@ app.get("/api/:id", async (req, res) => {
 //        name: upfile
 //        type: file
 //        description: The file to upload.
-//post the data
-/**
- * @swagger
-//  * /freedom-cars-carmodel/new:
-//  *   post:
-//  *     summary: Create a object.
-//  *     description: this api is used to add the data
-//  *     consumes:
-//           - multipart/form-data
-//  *     parameters:
-//  *        - in : formData
-//  *        name: upfile
-//  *        type: file
-//  *        description: The file to upload.
-//  *       - in: formData
-//  * name: note
-//           type: string
-//           required: true
-//           description: Description of file contents.
-//  * 
-//  * 
-//  *  
-//  *          
-//  *       content:
-//  *         application/json:
-//  *           schema:
-//  *             $ref: '#components/schema/carmodel'
-//  *     responses : 
-//  *          200:
-//  *             description: Added successfully
-//  *             properties:
-//  *               car_type:
-//  *                 type: string
-//  *                
-//  *  
-// */
-app.listen(port, () => {
-  console.log(`http://127.0.0.1:${port}`);
-});

@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const carmodel = new mongoose.Schema({
+  featuresId:{
+    type: mongoose.Schema.Types.ObjectId, ref:"Feature",
+  },
+  specificationId:{
+    type: mongoose.Schema.Types.ObjectId, ref:"Specification"
+  },
   car_type: {
     type: String,
     required: true,

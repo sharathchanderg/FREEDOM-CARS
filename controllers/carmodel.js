@@ -24,8 +24,12 @@ const bannerImgStorage = multer.diskStorage({
     limits: { fileSize: bannerImgMaxSize }
   });
 
+
+//get the car model with car features and specification
+
+
 //insert carmodel
-exports.addCarmodel = function (req, res) {
+exports.addCarmodel =  (req, res)=> {
   try {
     const carmodel = new Carmodel({
         car_type: req.body.car_type,
@@ -88,7 +92,7 @@ exports.updateCarModel = async function (req, res) {
     } else {
       res
         .status(400)
-        .send({ success: false, message: "invalid model" });
+        .send({ success: false, message: "not updated" });
     }
   } catch (err) {
     res
@@ -102,11 +106,11 @@ exports.deleteCarModel = async function (req, res) {
   try {
     const CarModelDeleted = await Carmodel.findOneAndDelete({ _id: req.params.id });
     if (CarModelDeleted) {
-      res.status(200).send({ success: true, message: "successfully deleted," });
+      res.status(200).send({ success: true, message: "successfully deleted" });
     } else {
       res
         .status(400)
-        .send({ success: false, message: "invalid model" });
+        .send({ success: false, message: "ntot deleted" });
     }
   } catch (err) {
     res

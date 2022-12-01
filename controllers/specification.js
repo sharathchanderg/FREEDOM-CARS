@@ -2,7 +2,7 @@ const Specification = require("../models/specification");
 
 exports.new_specification = async function(req, res){
   try {
-    const specifications = await new Specification({
+    const specifications = new Specification({
         specification_name: req.body.specification_name,
         date: req.body.date,
         status: req.body.status
